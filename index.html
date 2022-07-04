@@ -1,0 +1,66 @@
+<!doctype html>
+<html>
+<head>
+  <title>Hello, Snaps!</title>
+</head>
+<body>
+  <h1>Hello, Snaps!</h1>
+
+  <button class="connect">Connect</button>
+  <button class="sendHello">Send Hello</button>
+  <button class="getPrivkey">Get private key</button>
+
+  <script>
+    const snapId = `local:${window.location.href}`;
+
+    const connectButton = document.querySelector('button.connect')
+    const sendButton = document.querySelector('button.sendHello')
+    const getPrivkeyButton = document.querySelector('button.getPrivkey')
+
+    connectButton.addEventListener('click', connect)
+    sendButton.addEventListener('click', send)
+    getPrivkeyButton.addEventListener('click', getPrivkey)
+
+    // here we get permissions to interact with and install the snap
+    async function connect () {
+      await ethereum.request({
+        method: 'wallet_enable',
+        params: [{
+          wallet_snap: { [snapId]: {} },
+        }]
+      })
+    }
+
+    async function send () {
+      try {
+        const response = await ethereum.request({
+          method: 'wallet_invokeSnap',
+          params: [snapId, {
+            method: 'hello'
+          }]
+        })
+        console.log(response);
+      } catch (err) {
+        console.error(err)
+        alert('Problem happened: ' + err.message || err)
+      }
+    }
+
+    async function getPrivkey () {
+      try {
+        const response = await ethereum.request({
+          method: 'wallet_invokeSnap',
+          params: [snapId, {
+            method: 'getPublicKey',
+            params: [`0'/0'`]
+          }]
+        })
+        console.log(response);
+      } catch (err) {
+        console.error(err)
+        alert('Problem happened: ' + err.message || err)
+      }
+    }
+  </script>
+</body>
+</html>
