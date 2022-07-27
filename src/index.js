@@ -2,21 +2,21 @@ import nacl from 'tweetnacl';
 import bs58 from 'bs58';
 import { deriveKeyPair } from './privateKey';
 
-wallet.registerRpcMessageHandler(async (originString, requestObject) => {
-  switch (requestObject.method) {
+module.exports.onRpcRequest = async ({ origin, request }) => {
+  switch (request.method) {
     case 'getPublicKey': {
-      const [ path ] = requestObject.params || [];
+      const [ path ] = request.params || [];
       const keyPair = await deriveKeyPair(path);
       return bs58.encode(keyPair.publicKey);
     }
     case 'signTransaction': {
-      const [ path, message ] = requestObject.params || [];
+      const [ path, message ] = request.params || [];
 
       const accepted = await wallet.request({
         method: 'snap_confirm',
         params: [{
           prompt: 'Sign transaction',
-          description: `${originString} is requesting to sign the following transaction`,
+          description: `${origin} is requesting to sign the following transaction`,
           textAreaContent: message
         }]
       });
@@ -36,7 +36,7 @@ wallet.registerRpcMessageHandler(async (originString, requestObject) => {
       };
     }
     case 'signAllTransactions': {
-      const [ path, messages ] = requestObject.params || [];
+      const [ path, messages ] = request.params || [];
 
       const keyPair = await deriveKeyPair(path);
 
@@ -44,7 +44,7 @@ wallet.registerRpcMessageHandler(async (originString, requestObject) => {
         method: 'snap_confirm',
         params: [{
           prompt: 'Sign transaction',
-          description: `${originString} is requesting to sign the following transactions`,
+          description: `${origin} is requesting to sign the following transactions`,
           textAreaContent: messages.map((message) => {
             const maxSize = Math.floor(1800 / messages.length - 50);
             if (message.length > maxSize) {
@@ -72,7 +72,7 @@ wallet.registerRpcMessageHandler(async (originString, requestObject) => {
       };
     }
     case 'signMessage': {
-      const [ path, message, display = 'utf8' ] = requestObject.params || [];
+      const [ path, message, display = 'utf8' ] = request.params || [];
 
       const keyPair = await deriveKeyPair(path);
 
@@ -91,7 +91,7 @@ wallet.registerRpcMessageHandler(async (originString, requestObject) => {
         method: 'snap_confirm',
         params: [{
           prompt: 'Sign transaction',
-          description: `${originString} is requesting to sign the following message`,
+          description: `${origin} is requesting to sign the following message`,
           textAreaContent: decodedMessage
         }]
       });
@@ -115,4 +115,4 @@ wallet.registerRpcMessageHandler(async (originString, requestObject) => {
         message: 'Method not supported'
       };
   }
-});
+};

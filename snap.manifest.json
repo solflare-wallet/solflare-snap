@@ -1,9 +1,9 @@
 {
-  "version": "0.0.3",
+  "version": "0.0.4",
   "description": "The Solana Snap.",
   "proposedName": "@solflare-wallet/oh-snap",
   "source": {
-    "shasum": "e+DYrtApr1N6vxQ0xN3zr3vDnOjyUrRnBFHob6MFvWw=",
+    "shasum": "iWsQ4eX3MWZDtelNo6+TYp0xdLRlRfN3hgN8Eeyw38I=",
     "location": {
       "npm": {
         "filePath": "dist/bundle.js",
