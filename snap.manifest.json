@@ -3,7 +3,7 @@
   "description": "The Solana Snap.",
   "proposedName": "@solflare-wallet/oh-snap",
   "source": {
-    "shasum": "FEhJyAMfqByxA04cmuSZhsPkQtfjzyhQw33CkZGWWtQ=",
+    "shasum": "DPhnXv32JCyUfq5kCvqcl0f/u8zCHaGI98E/X0gQXY4=",
     "location": {
       "npm": {
         "filePath": "dist/bundle.js",
