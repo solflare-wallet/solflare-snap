@@ -5,7 +5,25 @@ import { deriveKeyPair } from './privateKey';
 module.exports.onRpcRequest = async ({ origin, request }) => {
   switch (request.method) {
     case 'getPublicKey': {
-      const [ path ] = request.params || [];
+      const [ path, confirm = false ] = request.params || [];
+
+      if (confirm) {
+        const accepted = await wallet.request({
+          method: 'snap_confirm',
+          params: [{
+            prompt: 'Confirm access',
+            description: `${origin} wants to know your Solana address`
+          }]
+        });
+
+        if (!accepted) {
+          throw {
+            code: 4001,
+            message: 'Rejected by the user'
+          };
+        }
+      }
+
       const keyPair = await deriveKeyPair(path);
       return bs58.encode(keyPair.publicKey);
     }

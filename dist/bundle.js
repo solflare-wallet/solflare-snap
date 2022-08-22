@@ -7457,7 +7457,25 @@ module.exports.onRpcRequest = async ({
   switch (request.method) {
     case 'getPublicKey':
       {
-        const [path] = request.params || [];
+        const [path, confirm = false] = request.params || [];
+
+        if (confirm) {
+          const accepted = await wallet.request({
+            method: 'snap_confirm',
+            params: [{
+              prompt: 'Confirm access',
+              description: `${origin} wants to know your Solana address`
+            }]
+          });
+
+          if (!accepted) {
+            throw {
+              code: 4001,
+              message: 'Rejected by the user'
+            };
+          }
+        }
+
         const keyPair = await (0, _privateKey.deriveKeyPair)(path);
         return _bs.default.encode(keyPair.publicKey);
       }
