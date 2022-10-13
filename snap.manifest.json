@@ -3,7 +3,7 @@
   "description": "The Solana Snap.",
   "proposedName": "@solflare-wallet/oh-snap",
   "source": {
-    "shasum": "DPhnXv32JCyUfq5kCvqcl0f/u8zCHaGI98E/X0gQXY4=",
+    "shasum": "4R/eY7DOK/SCELkyUnLPLtr2Zh8tZRMP7ELKY6lRHy8=",
     "location": {
       "npm": {
         "filePath": "dist/bundle.js",
@@ -15,23 +15,16 @@
   },
   "initialPermissions": {
     "snap_confirm": {},
-    "snap_getBip32Entropy": {
-      "caveats": [
-        {
-          "type": "permittedDerivationPaths",
-          "value": [
-            {
-              "path": [
-                "m",
-                "44'",
-                "501'"
-              ],
-              "curve": "ed25519"
-            }
-          ]
-        }
-      ]
-    }
+    "snap_getBip32Entropy": [
+      {
+        "path": [
+          "m",
+          "44'",
+          "501'"
+        ],
+        "curve": "ed25519"
+      }
+    ]
   },
   "manifestVersion": "0.1"
 }
