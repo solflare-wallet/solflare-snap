@@ -21,7 +21,10 @@ export async function deriveKeyPair (path = '') {
   }
 
   const solanaNode = await wallet.request({
-    method: 'snap_getBip44Entropy_501'
+    method: 'snap_getBip44Entropy',
+    params: {
+      coinType: 501
+    }
   });
 
   const segments = path.split('/').slice(3).filter(Boolean);

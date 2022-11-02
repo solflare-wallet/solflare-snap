@@ -1,9 +1,9 @@
 {
-  "version": "0.0.4",
+  "version": "0.0.5",
   "description": "The Solana Snap.",
   "proposedName": "@solflare-wallet/oh-snap",
   "source": {
-    "shasum": "nKSfOiOxnGAUsTVxGo8Zcouaym5Yb77xXx/y7jPKdYk=",
+    "shasum": "15f0GQUvTNTVyJ7eIJuZE8DUdP8B475Hi2fnbJi69sE=",
     "location": {
       "npm": {
         "filePath": "dist/bundle.js",
@@ -15,7 +15,11 @@
   },
   "initialPermissions": {
     "snap_confirm": {},
-    "snap_getBip44Entropy_501": {}
+    "snap_getBip44Entropy": [
+      {
+        "coinType": 501
+      }
+    ]
   },
   "manifestVersion": "0.1"
 }
