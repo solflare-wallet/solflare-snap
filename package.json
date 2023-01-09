@@ -14,7 +14,7 @@
   ],
   "dependencies": {
     "@babel/runtime": "^7.18.9",
-    "@metamask/key-tree": "^4.0.0",
+    "@metamask/key-tree": "^6.0.0",
     "bs58": "^5.0.0",
     "tweetnacl": "^1.0.3"
   }

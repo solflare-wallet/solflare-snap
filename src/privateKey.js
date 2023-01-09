@@ -23,5 +23,5 @@ export async function deriveKeyPair (path = '') {
 
   const keypair = await node.derive(segments.map((segment) => `bip32:${segment}`));
 
-  return nacl.sign.keyPair.fromSeed(Uint8Array.from(keypair.privateKeyBuffer));
+  return nacl.sign.keyPair.fromSeed(Uint8Array.from(keypair.privateKeyBytes));
 }
