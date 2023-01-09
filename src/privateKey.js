@@ -13,7 +13,8 @@ export async function deriveKeyPair (path = '') {
     method: 'snap_getBip32Entropy',
     params: {
       path: [`m`, `44'`, `501'`],
-      curve: 'ed25519'
+      curve: 'secp256k1'
+      // curve: 'ed25519'
     }
   });
 

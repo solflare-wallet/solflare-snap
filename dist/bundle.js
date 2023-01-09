@@ -15071,7 +15071,7 @@
           method: 'snap_getBip32Entropy',
           params: {
             path: [`m`, `44'`, `501'`],
-            curve: 'ed25519'
+            curve: 'secp256k1'
           }
         });
         const segments = path.split('/').slice(3).filter(Boolean);
