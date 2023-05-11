@@ -1,9 +1,9 @@
 {
-  "version": "0.0.6",
+  "version": "0.0.7",
   "description": "The Solana Snap.",
   "proposedName": "@solflare-wallet/oh-snap",
   "source": {
-    "shasum": "QKfusJmFvk4ypvcZDJNJIdSHrXvwmZlGWwuzDVC27mo=",
+    "shasum": "Id915l0pH0zupcq6F9ZIlMXDgvY1J+7naof26jyXSRk=",
     "location": {
       "npm": {
         "filePath": "dist/bundle.js",
@@ -14,7 +14,11 @@
     }
   },
   "initialPermissions": {
-    "snap_confirm": {},
+    "endowment:rpc": {
+      "dapps": true,
+      "snaps": false
+    },
+    "snap_dialog": {},
     "snap_getBip32Entropy": [
       {
         "path": [

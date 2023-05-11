@@ -9,7 +9,7 @@ export async function deriveKeyPair (path = '') {
     }
   }
 
-  const rootNode = await wallet.request({
+  const rootNode = await snap.request({
     method: 'snap_getBip32Entropy',
     params: {
       path: [`m`, `44'`, `501'`],
@@ -22,7 +22,7 @@ export async function deriveKeyPair (path = '') {
 
   const node = await SLIP10Node.fromJSON(rootNode);
 
-  const keypair = await node.derive(segments.map((segment) => `bip32:${segment}`));
+  const keypair = await node.derive(segments.map((segment) => `slip10:${segment}`));
 
   return nacl.sign.keyPair.fromSeed(Uint8Array.from(keypair.privateKeyBytes));
 }

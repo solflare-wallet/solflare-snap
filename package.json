@@ -1,6 +1,6 @@
 {
   "name": "@solflare-wallet/oh-snap",
-  "version": "0.0.6",
+  "version": "0.0.7",
   "description": "",
   "main": "src/index.js",
   "scripts": {},
@@ -13,8 +13,9 @@
     "snap.manifest.json"
   ],
   "dependencies": {
-    "@babel/runtime": "^7.18.9",
-    "@metamask/key-tree": "^6.0.0",
+    "@babel/runtime": "^7.21.5",
+    "@metamask/key-tree": "^7.0.0",
+    "@metamask/snaps-ui": "^0.32.2",
     "bs58": "^5.0.0",
     "tweetnacl": "^1.0.3"
   }
