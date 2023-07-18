@@ -1,9 +1,9 @@
 {
-  "version": "0.0.7",
+  "version": "0.0.8",
   "description": "The Solana Snap.",
-  "proposedName": "@solflare-wallet/oh-snap",
+  "proposedName": "Solana Manager",
   "source": {
-    "shasum": "Id915l0pH0zupcq6F9ZIlMXDgvY1J+7naof26jyXSRk=",
+    "shasum": "8Lb+2++orDAqrmOGP0NgdGfSTwVaA8dlbOmrrrkGYeA=",
     "location": {
       "npm": {
         "filePath": "dist/bundle.js",
@@ -26,7 +26,7 @@
           "44'",
           "501'"
         ],
-        "curve": "secp256k1"
+        "curve": "ed25519"
       }
     ]
   },
