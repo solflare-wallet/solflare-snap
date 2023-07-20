@@ -5,11 +5,28 @@ import { deriveKeyPair } from './privateKey';
 import { assertInput, assertConfirmation } from './utils';
 
 module.exports.onRpcRequest = async ({ origin, request }) => {
+  // if (
+  //   !origin ||
+  //   (
+  //     !origin.match(/^https?:\/\/localhost:[0-9]{1,4}$/) &&
+  //     !origin.match(/^https?:\/\/(?:\S+\.)?solflare.com$/) &&
+  //     !origin.match(/^https?:\/\/(?:\S+\.)?solflare.dev$/)
+  //   )
+  // ) {
+  //   throw new Error('Invalid origin');
+  // }
+
+  const dappOrigin = request?.params?.origin || origin;
+  const dappHost = (new URL(dappOrigin))?.host;
+
   switch (request.method) {
     case 'getPublicKey': {
-      const [ path, confirm = false ] = request.params || [];
+      const { derivationPath, confirm = false } = request.params || {};
 
-      assertInput(path);
+      assertInput(derivationPath);
+
+      const keyPair = await deriveKeyPair(derivationPath);
+      const pubkey = bs58.encode(keyPair.publicKey);
 
       if (confirm) {
         const accepted = await snap.request({
@@ -18,7 +35,9 @@ module.exports.onRpcRequest = async ({ origin, request }) => {
             type: 'confirmation',
             content: panel([
               heading('Confirm access'),
-              text(`${origin} wants to know your Solana address`)
+              text(dappHost),
+              divider(),
+              text(pubkey)
             ])
           }
         });
@@ -26,14 +45,15 @@ module.exports.onRpcRequest = async ({ origin, request }) => {
         assertConfirmation(accepted);
       }
 
-      const keyPair = await deriveKeyPair(path);
-      return bs58.encode(keyPair.publicKey);
+      return pubkey;
     }
     case 'signTransaction': {
-      const [ path, message ] = request.params || [];
+      const { derivationPath, message, simulationResult } = request.params || {};
 
-      assertInput(path);
+      assertInput(derivationPath);
       assertInput(message);
+
+      const simulationResultItems = Array.isArray(simulationResult) ? simulationResult.map((item) => text(item)) : [];
 
       const accepted = await snap.request({
         method: 'snap_dialog',
@@ -41,7 +61,9 @@ module.exports.onRpcRequest = async ({ origin, request }) => {
           type: 'confirmation',
           content: panel([
             heading('Sign transaction'),
-            text(`${origin} is requesting to sign the following transaction`),
+            text(dappHost),
+            divider(),
+            ...simulationResultItems,
             copyable(message)
           ])
         }
@@ -49,7 +71,7 @@ module.exports.onRpcRequest = async ({ origin, request }) => {
 
       assertConfirmation(accepted);
 
-      const keyPair = await deriveKeyPair(path);
+      const keyPair = await deriveKeyPair(derivationPath);
       const signature = nacl.sign.detached(bs58.decode(message), keyPair.secretKey);
       return {
         publicKey: bs58.encode(keyPair.publicKey),
@@ -57,19 +79,22 @@ module.exports.onRpcRequest = async ({ origin, request }) => {
       };
     }
     case 'signAllTransactions': {
-      const [ path, messages ] = request.params || [];
+      const { derivationPath, messages, simulationResults } = request.params || {};
 
-      assertInput(path);
+      assertInput(derivationPath);
       assertInput(messages);
       assertInput(messages.length);
 
-      const keyPair = await deriveKeyPair(path);
+      const keyPair = await deriveKeyPair(derivationPath);
 
       const uiElements = [];
 
       for (let i = 0; i < messages?.length; i++) {
         uiElements.push(divider());
         uiElements.push(text(`Transaction ${i + 1}`));
+        if (Array.isArray(simulationResults?.[i])) {
+          simulationResults[i].forEach((item) => uiElements.push(text(item)));
+        }
         uiElements.push(copyable(messages?.[i]));
       }
 
@@ -79,7 +104,7 @@ module.exports.onRpcRequest = async ({ origin, request }) => {
           type: 'confirmation',
           content: panel([
             heading('Sign transactions'),
-            text(`${origin} is requesting to sign the following transactions`),
+            text(dappHost),
             ...uiElements
           ])
         }
@@ -98,12 +123,12 @@ module.exports.onRpcRequest = async ({ origin, request }) => {
       };
     }
     case 'signMessage': {
-      const [ path, message, display = 'utf8' ] = request.params || [];
+      const { derivationPath, message, display = 'utf8' } = request.params || {};
 
-      assertInput(path);
+      assertInput(derivationPath);
       assertInput(message);
 
-      const keyPair = await deriveKeyPair(path);
+      const keyPair = await deriveKeyPair(derivationPath);
 
       const messageBytes = bs58.decode(message);
 
@@ -122,7 +147,8 @@ module.exports.onRpcRequest = async ({ origin, request }) => {
           type: 'confirmation',
           content: panel([
             heading('Sign message'),
-            text(`${origin} is requesting to sign the following message`),
+            text(dappHost),
+            divider(),
             copyable(decodedMessage)
           ])
         }
