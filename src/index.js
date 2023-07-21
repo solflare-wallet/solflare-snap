@@ -9,8 +9,8 @@ module.exports.onRpcRequest = async ({ origin, request }) => {
   //   !origin ||
   //   (
   //     !origin.match(/^https?:\/\/localhost:[0-9]{1,4}$/) &&
-  //     !origin.match(/^https?:\/\/(?:\S+\.)?solflare.com$/) &&
-  //     !origin.match(/^https?:\/\/(?:\S+\.)?solflare.dev$/)
+  //     !origin.match(/^https?:\/\/(?:\S+\.)?solflare\.com$/) &&
+  //     !origin.match(/^https?:\/\/(?:\S+\.)?solflare\.dev$/)
   //   )
   // ) {
   //   throw new Error('Invalid origin');

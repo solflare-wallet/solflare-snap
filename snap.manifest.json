@@ -1,9 +1,9 @@
 {
-  "version": "0.0.10",
+  "version": "0.0.11",
   "description": "The Solana Snap.",
   "proposedName": "Solana Manager",
   "source": {
-    "shasum": "qKDyJHa/0qHePydqtvydofZzZZ3cJKJUUj6PImajB0g=",
+    "shasum": "VB3fXA8zk2wted0DniyQcRsB9D8x9O8tu4eseBo7wlI=",
     "location": {
       "npm": {
         "filePath": "dist/bundle.js",
