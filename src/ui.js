@@ -1,5 +1,5 @@
 import { panel, heading, text, copyable, divider } from '@metamask/snaps-ui';
-import { assertAllStrings, assertIsArray } from './utils';
+import { assertAllStrings, assertInput, assertIsArray } from './utils';
 
 export function renderGetPublicKey(host, pubkey) {
   return snap.request({
@@ -46,6 +46,7 @@ export function renderSignAllTransactions(host, messages, simulationResults, dis
     uiElements.push(text(`Transaction ${i + 1}`));
 
     assertIsArray(simulationResults[i]);
+    assertInput(simulationResults[i].length);
     assertAllStrings(simulationResults[i]);
 
     simulationResults[i].forEach((item) => uiElements.push(text(item)));

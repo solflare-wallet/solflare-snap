@@ -65,6 +65,7 @@ module.exports.onRpcRequest = async ({ origin, request }) => {
       assertInput(derivationPath);
       assertIsString(derivationPath);
       assertInput(messages);
+      assertIsArray(messages);
       assertInput(messages.length);
       assertAllStrings(messages);
       assertIsArray(simulationResults);
