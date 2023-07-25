@@ -53,7 +53,7 @@ module.exports.onRpcRequest = async ({ origin, request }) => {
 
       const keyPair = await deriveKeyPair(derivationPath);
       const signature = nacl.sign.detached(bs58.decode(message), keyPair.secretKey);
-      
+
       return {
         publicKey: bs58.encode(keyPair.publicKey),
         signature: bs58.encode(signature)

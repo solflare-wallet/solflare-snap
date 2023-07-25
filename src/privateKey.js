@@ -1,7 +1,7 @@
 import nacl from 'tweetnacl';
 import { SLIP10Node } from '@metamask/key-tree';
 
-export async function deriveKeyPair (path = '') {
+export async function deriveKeyPair(path = '') {
   if (!path.startsWith(`m/44'/501'`)) {
     throw {
       code: 4001,
