@@ -7,8 +7,7 @@
   <h1>Hello, Snaps!</h1>
 
   <button class="connect">Connect</button>
-  <button class="sendHello">Send Hello</button>
-  <button class="getPrivkey">Get private key</button>
+  <button class="getPrivkey">Get public key</button>
 
   <script>
     const snapId = `local:${window.location.href}`;
@@ -18,7 +17,6 @@
     const getPrivkeyButton = document.querySelector('button.getPrivkey')
 
     connectButton.addEventListener('click', connect)
-    sendButton.addEventListener('click', send)
     getPrivkeyButton.addEventListener('click', getPrivkey)
 
     // here we get permissions to interact with and install the snap
@@ -27,24 +25,6 @@
         method: 'wallet_requestSnaps',
         params: { [snapId]: {} }
       })
-    }
-
-    async function send () {
-      try {
-        const response = await ethereum.request({
-          method: 'wallet_invokeSnap',
-          params: {
-            snapId,
-            request: {
-              method: 'hello'
-            }
-          }
-        })
-        console.log(response);
-      } catch (err) {
-        console.error(err)
-        alert('Problem happened: ' + err.message || err)
-      }
     }
 
     async function getPrivkey () {
