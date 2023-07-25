@@ -5,16 +5,16 @@ import { assertInput, assertConfirmation, assertAllStrings, assertIsString, asse
 import { renderGetPublicKey, renderSignTransaction, renderSignAllTransactions, renderSignMessage } from './ui';
 
 module.exports.onRpcRequest = async ({ origin, request }) => {
-  // if (
-  //   !origin ||
-  //   (
-  //     !origin.match(/^https?:\/\/localhost:[0-9]{1,4}$/) &&
-  //     !origin.match(/^https?:\/\/(?:\S+\.)?solflare\.com$/) &&
-  //     !origin.match(/^https?:\/\/(?:\S+\.)?solflare\.dev$/)
-  //   )
-  // ) {
-  //   throw new Error('Invalid origin');
-  // }
+  if (
+    !origin ||
+    (
+      !origin.match(/^https?:\/\/localhost:[0-9]{1,4}$/) &&
+      !origin.match(/^https?:\/\/(?:\S+\.)?solflare\.com$/) &&
+      !origin.match(/^https?:\/\/(?:\S+\.)?solflare\.dev$/)
+    )
+  ) {
+    throw new Error('Invalid origin');
+  }
 
   const dappOrigin = request?.params?.origin || origin;
   const dappHost = (new URL(dappOrigin))?.host;
