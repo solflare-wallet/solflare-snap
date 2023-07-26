@@ -1,14 +1,14 @@
 {
-  "version": "0.0.12",
+  "version": "1.0.0",
   "description": "The Solana Snap.",
   "proposedName": "Solana Manager",
   "source": {
-    "shasum": "28vfi9o1TbOvQJHFEUKS8WMEColVkgTOOJmVLguhmzU=",
+    "shasum": "KQbUJpORj9R5GsSLwxPvZknSK/eQXIqUcQGpRr6HSEU=",
     "location": {
       "npm": {
         "filePath": "dist/bundle.js",
         "iconPath": "logo.svg",
-        "packageName": "@solflare-wallet/oh-snap",
+        "packageName": "@solflare-wallet/solana-snap",
         "registry": "https://registry.npmjs.org"
       }
     }
