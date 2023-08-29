@@ -1,19 +1,24 @@
 {
   "name": "@solflare-wallet/solana-snap",
   "version": "1.0.0",
-  "description": "",
+  "description": "The Solana Snap.",
   "main": "src/index.js",
   "scripts": {
     "start": "mm-snap build && mm-snap serve",
     "build": "mm-snap build",
     "deploy": "npm run build && npm publish"
   },
-  "author": "",
+  "homepage": "https://github.com/solflare-wallet/solflare-snap",
+  "author": "Solflare Developers <developers@solflare.com>",
   "license": "ISC",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/solflare-wallet/solflare-snap.git"
+  },
+  "bugs": "https://github.com/solflare-wallet/solflare-snap/issues",
   "files": [
     "dist/",
     "logo.svg",
-    "snap.config.json",
     "snap.manifest.json"
   ],
   "dependencies": {
