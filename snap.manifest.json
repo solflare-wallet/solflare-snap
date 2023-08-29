@@ -3,7 +3,7 @@
   "description": "The Solana Snap.",
   "proposedName": "Solana Manager",
   "source": {
-    "shasum": "KQbUJpORj9R5GsSLwxPvZknSK/eQXIqUcQGpRr6HSEU=",
+    "shasum": "F3CDej9F17cCSJekzgwwuC6t8JOlZyuVA9KZqbJsUtc=",
     "location": {
       "npm": {
         "filePath": "dist/bundle.js",
