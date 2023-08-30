@@ -1,5 +1,4 @@
 import { panel, heading, text, copyable, divider } from '@metamask/snaps-ui';
-import { assertAllStrings, assertInput, assertIsArray } from './utils';
 
 export function renderGetPublicKey(host, pubkey) {
   return snap.request({
@@ -16,9 +15,7 @@ export function renderGetPublicKey(host, pubkey) {
   });
 }
 
-export function renderSignTransaction(host, message, simulationResult, displayMessage = true) {
-  const simulationResultItems = simulationResult.map((item) => text(item));
-
+export function renderSignTransaction(host, message) {
   return snap.request({
     method: 'snap_dialog',
     params: {
@@ -26,17 +23,16 @@ export function renderSignTransaction(host, message, simulationResult, displayMe
       content: panel([
         heading('Sign transaction'),
         text(host),
-        ...(simulationResultItems.length > 0 || displayMessage ? [divider()] : []),
-        ...simulationResultItems,
-        ...(displayMessage ? [copyable(message)] : [])
+        divider(),
+        copyable(message)
       ])
     }
   });
 }
 
-export function renderSignAllTransactions(host, messages, simulationResults, displayMessage = true) {
+export function renderSignAllTransactions(host, messages) {
   if (messages.length === 1) {
-    return renderSignTransaction(host, messages[0], simulationResults[0], displayMessage);
+    return renderSignTransaction(host, messages[0]);
   }
 
   const uiElements = [];
@@ -44,15 +40,7 @@ export function renderSignAllTransactions(host, messages, simulationResults, dis
   for (let i = 0; i < messages.length; i++) {
     uiElements.push(divider());
     uiElements.push(text(`Transaction ${i + 1}`));
-
-    assertIsArray(simulationResults[i]);
-    assertInput(simulationResults[i].length);
-    assertAllStrings(simulationResults[i]);
-
-    simulationResults[i].forEach((item) => uiElements.push(text(item)));
-    if (displayMessage) {
-      uiElements.push(copyable(messages[i]));
-    }
+    uiElements.push(copyable(messages[i]));
   }
 
   return snap.request({
