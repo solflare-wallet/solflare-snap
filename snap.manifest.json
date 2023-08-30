@@ -1,5 +1,5 @@
 {
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "The Solana Snap.",
   "proposedName": "Solana Manager",
   "repository": {
@@ -7,7 +7,7 @@
     "url": "https://github.com/solflare-wallet/solflare-snap.git"
   },
   "source": {
-    "shasum": "axi2QZL5X+/3m0lNXTxGjpd4xzG+nRc6vww2Fdt7bcA=",
+    "shasum": "UzMVWZvs3zmvUfgypAsqt7z3p066kFcDXnKdwq1yucQ=",
     "location": {
       "npm": {
         "filePath": "dist/bundle.js",
