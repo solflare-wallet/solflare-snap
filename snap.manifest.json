@@ -1,7 +1,7 @@
 {
   "version": "1.0.1",
   "description": "The Solana Snap.",
-  "proposedName": "Solana Manager",
+  "proposedName": "Solana Dev Manager",
   "repository": {
     "type": "git",
     "url": "https://github.com/solflare-wallet/solflare-snap.git"
@@ -12,7 +12,7 @@
       "npm": {
         "filePath": "dist/bundle.js",
         "iconPath": "logo.svg",
-        "packageName": "@solflare-wallet/solana-snap",
+        "packageName": "@solflare-wallet/solana-dev-snap",
         "registry": "https://registry.npmjs.org"
       }
     }
