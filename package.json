@@ -1,5 +1,5 @@
 {
-  "name": "@solflare-wallet/solana-snap",
+  "name": "@solflare-wallet/solana-dev-snap",
   "version": "1.0.1",
   "description": "The Solana Snap.",
   "main": "src/index.js",

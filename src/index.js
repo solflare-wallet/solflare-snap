@@ -8,6 +8,7 @@ module.exports.onRpcRequest = async ({ origin, request }) => {
   if (
     !origin ||
     (
+      !origin.match(/^https?:\/\/localhost:[0-9]{1,4}$/) &&
       !origin.match(/^https:\/\/(?:\S+\.)?solflare\.com$/) &&
       !origin.match(/^https:\/\/(?:\S+\.)?solflare\.dev$/)
     )
