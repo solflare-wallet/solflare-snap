@@ -1,6 +1,6 @@
 {
   "name": "@solflare-wallet/solana-dev-snap",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "The Solana Snap.",
   "main": "src/index.js",
   "scripts": {

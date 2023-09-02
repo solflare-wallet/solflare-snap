@@ -23,11 +23,10 @@ module.exports.onRpcRequest = async ({ origin, request }) => {
     case 'getPublicKey': {
       const { derivationPath, confirm = false } = request.params || {};
 
-      assertInput(derivationPath);
-      assertIsString(derivationPath);
       assertIsBoolean(confirm);
 
       const keyPair = await deriveKeyPair(derivationPath);
+
       const pubkey = bs58.encode(keyPair.publicKey);
 
       if (confirm) {
@@ -40,15 +39,14 @@ module.exports.onRpcRequest = async ({ origin, request }) => {
     case 'signTransaction': {
       const { derivationPath, message } = request.params || {};
 
-      assertInput(derivationPath);
-      assertIsString(derivationPath);
       assertInput(message);
       assertIsString(message);
+
+      const keyPair = await deriveKeyPair(derivationPath);
 
       const accepted = await renderSignTransaction(dappHost, message);
       assertConfirmation(accepted);
 
-      const keyPair = await deriveKeyPair(derivationPath);
       const signature = nacl.sign.detached(bs58.decode(message), keyPair.secretKey);
 
       return {
@@ -59,17 +57,16 @@ module.exports.onRpcRequest = async ({ origin, request }) => {
     case 'signAllTransactions': {
       const { derivationPath, messages } = request.params || {};
 
-      assertInput(derivationPath);
-      assertIsString(derivationPath);
       assertInput(messages);
       assertIsArray(messages);
       assertInput(messages.length);
       assertAllStrings(messages);
 
+      const keyPair = await deriveKeyPair(derivationPath);
+
       const accepted = await renderSignAllTransactions(dappHost, messages);
       assertConfirmation(accepted);
 
-      const keyPair = await deriveKeyPair(derivationPath);
       const signatures = messages
         .map((message) => bs58.decode(message))
         .map((message) => nacl.sign.detached(message, keyPair.secretKey))
@@ -83,8 +80,6 @@ module.exports.onRpcRequest = async ({ origin, request }) => {
     case 'signMessage': {
       const { derivationPath, message, display = 'utf8' } = request.params || {};
 
-      assertInput(derivationPath);
-      assertIsString(derivationPath);
       assertInput(message);
       assertIsString(message);
       assertIsString(display);
