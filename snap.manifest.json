@@ -1,13 +1,13 @@
 {
   "version": "1.0.3",
-  "description": "Manage Solana-based tokens and NFTs, swap, stake, bridge from EVM to SOL, and connect to Solana apps with your MetaMask.",
+  "description": "Manage Solana-based tokens and NFTs, swap, stake, bridge from EVM to SOL, and connect to Solana apps with MetaMask.",
   "proposedName": "Solana Wallet",
   "repository": {
     "type": "git",
     "url": "https://github.com/solflare-wallet/solflare-snap.git"
   },
   "source": {
-    "shasum": "e0BxfAJ3aHCmPXYvIHxI2SWUiYohUWGlhm5sYwQ/ycM=",
+    "shasum": "Or9Baxt94oaLdwpPI6m+f3d5zLJ8Cavf7zBhnUQduoA=",
     "location": {
       "npm": {
         "filePath": "dist/bundle.js",
