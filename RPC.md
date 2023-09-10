@@ -8,7 +8,7 @@ Returns the wallet's public key encoded as Base58.
 
 An object containing:
 
-- `derivationPath` - A human-readable BIP-44 HD tree path. It must begin with m/44'/501'
+- `derivationPath` - Derivation paths segments that will be appended to m/44'/501'
 - `confirm` - Whether to show a confirm dialog.
 
 #### Returns
@@ -25,7 +25,7 @@ ethereum.request({
     request: {
       method: 'getPublicKey',
       params: {
-        derivationPath: `m/44'/501'/0'/0'`,
+        derivationPath: [`0'`, `0'`],
         confirm: true
       }
    }
@@ -41,10 +41,8 @@ Sign a transaction and return the signature encoded as Base58.
 
 An object containing:
 
-- `derivationPath` - A human-readable BIP-44 HD tree path. It must begin with m/44'/501'
+- `derivationPath` - Derivation paths segments that will be appended to m/44'/501'
 - `message` - Transaction message encoded as Base58
-- `simulationResult` - An array of strings, each representing a balance change, delegation or any other change formatted with Markdown
-- `displayMessage` - Whether to show the raw transaction message (as Base58) in the confirm dialog
 
 #### Returns
 
@@ -63,10 +61,8 @@ ethereum.request({
     request: {
       method: 'signTransaction',
       params: {
-        derivationPath: `m/44'/501'/0'/0'`,
-        message: '...',
-        simulationResult: ['+10 USDC', '-0.1 SOL'],
-        displayMessage: true
+        derivationPath: [`0'`, `0'`],
+        message: '...'
       }
    }
   }
@@ -81,10 +77,8 @@ Sign multiple transactions and return the signatures encoded as Base58.
 
 An object containing:
 
-- `derivationPath` - A human-readable BIP-44 HD tree path. It must begin with m/44'/501'
+- `derivationPath` - Derivation paths segments that will be appended to m/44'/501'
 - `messages` - An array of transaction messages encoded as Base58
-- `simulationResults` - An array of arrays of strings, each representing a balance change, delegation or any other change formatted with Markdown
-- `displayMessage` - Whether to show the raw transaction messages (as Base58) in the confirm dialog
 
 #### Returns
 
@@ -103,10 +97,8 @@ ethereum.request({
     request: {
       method: 'signAllTransactions',
       params: {
-        derivationPath: `m/44'/501'/0'/0'`,
-        messages: ['...', '...'],
-        simulationResults: [['+10 USDC', '-0.1 SOL'], ['-0.00001 SOL']],
-        displayMessage: true
+        derivationPath: [`0'`, `0'`],
+        messages: ['...', '...']
       }
    }
   }
@@ -121,7 +113,7 @@ Sign a message (can be either arbitrary bytes or a UTF-8 string) and return the 
 
 An object containing:
 
-- `derivationPath` - A human-readable BIP-44 HD tree path. It must begin with m/44'/501'
+- `derivationPath` - Derivation paths segments that will be appended to m/44'/501'
 - `message` - Message encoded as Base58
 - `display` - How to decode and display the message, `utf8` or `hex`
 
@@ -145,7 +137,7 @@ ethereum.request({
     request: {
       method: 'signMessage',
       params: {
-        derivationPath: `m/44'/501'/0'/0'`,
+        derivationPath: [`0'`, `0'`],
         message: base58Message,
         display: 'utf8'
       }
