@@ -1,0 +1,19 @@
+{
+  "compilerOptions": {
+    "sourceMap": true,
+    "noImplicitAny": false,
+    "module": "CommonJS",
+    "target": "es2020",
+    "lib": ["es2020", "DOM"],
+    "allowJs": true,
+    "moduleResolution": "node",
+    "declaration": true,
+    "declarationMap": true,
+    "esModuleInterop": true,
+    "experimentalDecorators": true,
+    "skipLibCheck": true,
+    "skipDefaultLibCheck": true,
+    "strictNullChecks": true,
+    "resolveJsonModule": true
+  }
+}

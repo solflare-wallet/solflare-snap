@@ -4,7 +4,7 @@ import { deriveKeyPair } from './privateKey';
 import { assertInput, assertConfirmation, assertAllStrings, assertIsString, assertIsBoolean, assertIsArray } from './utils';
 import { renderGetPublicKey, renderSignTransaction, renderSignAllTransactions, renderSignMessage } from './ui';
 
-module.exports.onRpcRequest = async ({ origin, request }) => {
+export const onRpcRequest = async ({ origin, request }) => {
   if (
     !origin ||
     (

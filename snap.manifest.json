@@ -7,7 +7,7 @@
     "url": "https://github.com/solflare-wallet/solflare-snap.git"
   },
   "source": {
-    "shasum": "hyw8D7jdrDe4FGohp7hjn7miXCk5JVo7yohV5Q3I2io=",
+    "shasum": "zahdvmtXWo0ddQFy6s9lJXLnPKpBOs3aHGi32zQSi4I=",
     "location": {
       "npm": {
         "filePath": "dist/bundle.js",
@@ -22,6 +22,14 @@
       "dapps": true,
       "snaps": false
     },
+    "endowment:keyring": {
+      "allowedOrigins": [
+        "https://solflare.com",
+        "https://*.solflare.com",
+        "https://solflare.dev",
+        "https://*.solflare.dev"
+      ]
+    },
     "snap_dialog": {},
     "snap_getBip32Entropy": [
       {
@@ -32,7 +40,9 @@
         ],
         "curve": "ed25519"
       }
-    ]
+    ],
+    "snap_manageAccounts": {},
+    "snap_manageState": {}
   },
   "manifestVersion": "0.1"
 }

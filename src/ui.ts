@@ -1,6 +1,6 @@
-import { panel, heading, text, copyable, divider } from '@metamask/snaps-ui';
+import { panel, heading, text, copyable, divider, DialogResult } from '@metamask/snaps-sdk';
 
-export function renderGetPublicKey(host, pubkey) {
+export async function renderGetPublicKey(host: string, pubkey: string): Promise<DialogResult> {
   return snap.request({
     method: 'snap_dialog',
     params: {
@@ -15,7 +15,7 @@ export function renderGetPublicKey(host, pubkey) {
   });
 }
 
-export function renderSignTransaction(host, message) {
+export async function renderSignTransaction(host: string, message: string): Promise<DialogResult> {
   return snap.request({
     method: 'snap_dialog',
     params: {
@@ -30,12 +30,12 @@ export function renderSignTransaction(host, message) {
   });
 }
 
-export function renderSignAllTransactions(host, messages) {
+export async function renderSignAllTransactions(host: string, messages: string[]): Promise<DialogResult> {
   if (messages.length === 1) {
     return renderSignTransaction(host, messages[0]);
   }
 
-  const uiElements = [];
+  const uiElements: any[] = [];
 
   for (let i = 0; i < messages.length; i++) {
     uiElements.push(divider());
@@ -56,7 +56,7 @@ export function renderSignAllTransactions(host, messages) {
   });
 }
 
-export function renderSignMessage(host, message) {
+export async function renderSignMessage(host: string, message: string): Promise<DialogResult> {
   return snap.request({
     method: 'snap_dialog',
     params: {

@@ -1,8 +1,8 @@
 import nacl from 'tweetnacl';
-import { SLIP10Node } from '@metamask/key-tree';
+import { HardenedSLIP10Node, SLIP10Node } from '@metamask/key-tree';
 import { assertInput, assertIsArray } from './utils';
 
-function isValidSegment(segment) {
+function isValidSegment(segment?: string) {
   if (typeof segment !== 'string') {
     return false;
   }
@@ -20,7 +20,7 @@ function isValidSegment(segment) {
   return true;
 }
 
-export async function deriveKeyPair(path) {
+export async function deriveKeyPair(path?: string[]) {
   assertIsArray(path);
   assertInput(path.length);
   assertInput(path.every((segment) => isValidSegment(segment)));
@@ -35,7 +35,9 @@ export async function deriveKeyPair(path) {
 
   const node = await SLIP10Node.fromJSON(rootNode);
 
-  const keypair = await node.derive(path.map((segment) => `slip10:${segment}`));
+  const keypair = await node.derive(
+    path.map((segment) => `slip10:${segment}` as HardenedSLIP10Node)
+  );
 
-  return nacl.sign.keyPair.fromSeed(Uint8Array.from(keypair.privateKeyBytes));
+  return nacl.sign.keyPair.fromSeed(Uint8Array.from(keypair.privateKeyBytes as Uint8Array));
 }

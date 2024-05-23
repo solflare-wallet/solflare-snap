@@ -4,7 +4,7 @@
   "description": "Manage Solana-based tokens and NFTs, swap, stake, bridge from EVM to SOL, and connect to Solana apps with MetaMask.",
   "main": "src/index.js",
   "scripts": {
-    "start": "mm-snap build && mm-snap serve",
+    "start": "mm-snap watch",
     "build": "mm-snap build",
     "deploy": "npm run build && npm publish"
   },
@@ -22,10 +22,13 @@
     "snap.manifest.json"
   ],
   "dependencies": {
-    "@babel/runtime": "^7.21.5",
-    "@metamask/key-tree": "^7.0.0",
-    "@metamask/snaps-ui": "^0.32.2",
+    "@metamask/key-tree": "^9.1.1",
+    "@metamask/snaps-sdk": "^4.0.0",
     "bs58": "^5.0.0",
+    "buffer": "^6.0.3",
     "tweetnacl": "^1.0.3"
+  },
+  "devDependencies": {
+    "@metamask/snaps-cli": "^6.2.0"
   }
 }
