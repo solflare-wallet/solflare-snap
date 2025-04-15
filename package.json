@@ -1,6 +1,6 @@
 {
   "name": "@solflare-wallet/solana-snap",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "description": "Manage Solana-based tokens and NFTs, swap, stake, bridge from EVM to SOL, and connect to Solana apps with MetaMask.",
   "main": "src/index.js",
   "scripts": {
